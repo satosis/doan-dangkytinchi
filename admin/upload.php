@@ -22,14 +22,13 @@
 
                 // echo ($sql);
                 // echo $conn->query($sql)
-                if($conn->query($sql)===TRUE){
-                }else{
+                if($conn->query($sql) !==TRUE){
                     // echo $sql;
                     $text = 'Something went wrong !!';
-                }
                 }
             }
         }
         echo $text;
       }
+    }
   ?>

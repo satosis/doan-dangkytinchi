@@ -2,33 +2,33 @@
     session_start();
     include '../db.php';
     function readcsv($file){
-        $test = file($file);
-        $final = [];
-        $target_dir = "file/";
-        $target_file = $target_dir . basename($_FILES["file"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-        if($imageFileType != "csv"){
-            echo '<script>alert("Sorry, only CSV files are allowed.")</script>';
-            $uploadOk = 0;
-            error_reporting(0);
-        }
-        $_SESSION["uploadOk"] = $uploadOk;
-        // echo $_SESSION["uploadOk"];
-        for($i = 0; $i<count($test);$i++){
-            $str ='';
-            $subans = [];
-            for($j=0;$j<strlen($test[$i]);$j++){
-                if($test[$i][$j] == ',' || $j == strlen($test[$i])-1){
-                    array_push($subans,$str);
-                    $str = '';
-                    continue;
-                }
-                $str.=$test[$i][$j];
-            }
-            array_push($final,$subans);
-        }
-        return $final;
+    //     $test = file($file);
+    //     $final = [];
+    //     $target_dir = "file/";
+    //     $target_file = $target_dir . basename($_FILES["file"]["name"]);
+    //     $uploadOk = 1;
+    //     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+    //     if($imageFileType != "csv"){
+    //         echo '<script>alert("Sorry, only CSV files are allowed.")</script>';
+    //         $uploadOk = 0;
+    //         error_reporting(0);
+    //     }
+    //     $_SESSION["uploadOk"] = $uploadOk;
+    //     // echo $_SESSION["uploadOk"];
+    //     for($i = 0; $i<count($test);$i++){
+    //         $str ='';
+    //         $subans = [];
+    //         for($j=0;$j<strlen($test[$i]);$j++){
+    //             if($test[$i][$j] == ',' || $j == strlen($test[$i])-1){
+    //                 array_push($subans,$str);
+    //                 $str = '';
+    //                 continue;
+    //             }
+    //             $str.=$test[$i][$j];
+    //         }
+    //         array_push($final,$subans);
+    //     }
+    //     return $final;
     }
 ?>
 <html>
@@ -263,7 +263,7 @@
         <h1>ADD BULK USER</h1>
         <form enctype="multipart/form-data" action="" method="POST">
             <label for="add_file">Choose File :</label>
-            <input type="file" name="file" id="file" multiple onchange='javascript:this.form.submit()'><br><br>
+            <input type="file" name="file" id="file" multiple><br><br>
             <span style="color:red"><em>Just Allow CSV File</em></span>
         </form>
         <div class="show" style="overflow-y:auto;">
@@ -274,28 +274,28 @@
 
     <?php
         if(!empty($_FILES)){
-            $file = $_FILES["file"]["name"];
+            // $file = $_FILES["file"]["name"];
 
-            $target_dir = "file/";
-            $target_file = $target_dir . basename($_FILES["file"]["name"]);
-            // echo $file;
-            move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
-            echo'<script>
-                let window_bulk = document.getElementById("window_bulk");
-                window_bulk.style.display = "block";
-                let close = document.getElementById("close");
-                close.onclick = function(){
-                    window_bulk.style.display = "none";
-                }
-                let bulk = document.getElementById("bulk");
-                bulk.onclick = function(){
-                    window_bulk.style.display = "block";
-                }
-                let submit = document.getElementById("submit");
-                submit.onclick = function(){
-                    location.href = "submit.php"
-                }
-            </script>';
+            // $target_dir = "file/";
+            // $target_file = $target_dir . basename($_FILES["file"]["name"]);
+            // // echo $file;
+            // move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+            // echo'<script>
+            //     let window_bulk = document.getElementById("window_bulk");
+            //     window_bulk.style.display = "block";
+            //     let close = document.getElementById("close");
+            //     close.onclick = function(){
+            //         window_bulk.style.display = "none";
+            //     }
+            //     let bulk = document.getElementById("bulk");
+            //     bulk.onclick = function(){
+            //         window_bulk.style.display = "block";
+            //     }
+            //     let submit = document.getElementById("submit");
+            //     submit.onclick = function(){
+            //         location.href = "submit.php"
+            //     }
+            // </script>';
         }
     ?>
 
@@ -410,23 +410,44 @@
     <script>
         $(document).ready(function(){
             $('#file').change(function(){
-                console.log(123);
-            var selectedFile = $('#file')[0].files[0];
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var data = event.target.result;
-                var workbook = XLSX.read(data, {
-                    type: 'binary'
-            });
-            workbook.SheetNames.forEach(function(sheetName) {
-                var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-                console.log(XL_row_object);
-            })
-            };
-            reader.onerror = function(event) {
-                console.error("File could not be read! Code " + event.target.error.code);
-            };
-                reader.readAsBinaryString(selectedFile);
+                var selectedFile = $('#file')[0].files[0];
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var data = event.target.result;
+                    var workbook = XLSX.read(data, {
+                        type: 'binary'
+                });
+                workbook.SheetNames.forEach(function(sheetName) {
+                    var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+                    console.log(XL_row_object);
+                    $('.show').empty();
+                    $('.show').append(`<table style="margin-left:20%">`);
+                    $('.show').append(`<tr>`);
+                    $('.show').append(`<td>STT</td>`);
+                    $('.show').append(`<td>EMAIL</td>`);
+                    $('.show').append(`<td>USERNAME</td>`);
+                    $('.show').append(`<td>NOTEL</td>`);
+                    $('.show').append(`<td>CREDIT</td>`);
+                    $('.show').append(`<td>STATUS</td>`);
+                    $('.show').append(`</tr>`);
+                    XL_row_object.forEach((element, key) => {
+                        $('.show').append(`<tr>`);
+                        $('.show').append(`<td>${key+1}</td>`);
+                        $('.show').append(`<td>${element['EMAIL']}</td>`);
+                        $('.show').append(`<td>${element['USERNAME']}</td>`);
+                        $('.show').append(`<td>${element['NOTEL']}</td>`);
+                        $('.show').append(`<td>${element['CREDIT']}</td>`);
+                        $('.show').append(`<td>${element['STATUS']}</td>`);
+                        $('.show').append(`</tr>`);
+                    });
+                        
+                    $('.show').append(`</table>`);
+                })
+                };
+                reader.onerror = function(event) {
+                    console.error("File could not be read! Code " + event.target.error.code);
+                };
+                    reader.readAsBinaryString(selectedFile);
             });
 
             $('#submit').click(function(){
