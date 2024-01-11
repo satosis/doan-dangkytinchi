@@ -94,7 +94,7 @@
         <div class="container pt-5 pb-3">
             <div class="row">
                 <table class="table" id="pmain">
-                <span id="pid<?php echo $i?>" style="display: none;"><?php echo $row["no"]?></span>
+                <span id="pid<?php echo $i?>" style="display: none;"><?php echo $row["sub"]?></span>
 
 
 
@@ -103,7 +103,7 @@
                             <label for="sub"><b>科目/MATA PELAJARAN:</b></label>
                         </td>
                         <td>
-                            <input type="hidden" name="period_id" value="<?php echo $row["no"] ?>" id="period_id">
+                            <input type="hidden" name="period" value="<?php echo $row["sub"] ?>" id="period">
                             <b id="<?php echo $row["sub"] ?>"><?php echo $row["sub"] ?></b>
                         </td>
                     </tr>
@@ -442,7 +442,6 @@
                             <label for="refleksi"><b>反思/REFLEKSI:</b></label>
                         </td>
                         <td>
-                            <input type="hidden" name="refleksi_id" id="refleksi_id">
                             <button style="width:50px; height:25px; border-radius: 10px" class="refleksi"><i class="fas fa-angle-right fa-lg"></i></button><br>
                             <span class="input<?php echo $i?>" id="refleksi"></span><br>
                             <span class="input<?php echo $i?>" id="inputRefleksi"></span>
@@ -463,7 +462,7 @@
                             <label for="tsm"><b>后续作业/TUGASAN SUSULAN MURID:</b></label>
                         </td>
                         <td>
-                            <input class="input<?php echo $i?> txt" type="text" name="tsm">
+                            <input class="input<?php echo $i?> txt" type="text" name="tsm" id="tsm">
                         </td>
                     </tr>
                 </table>
@@ -476,7 +475,7 @@
             }
 
             ?>
-        <button type="submit" class="me-5 px-5 py-2 btn btn-primary" name="submit" id='submit'>SUBMIT</button>
+        <button type="button" class="me-5 px-5 py-2 btn btn-primary" name="submit" id='submit'>SUBMIT</button>
         <br>
 
 
@@ -490,7 +489,6 @@
         var result;
 
         function get(num){
-            console.log(num);
             return num;
         }
         function pass(i){
@@ -508,8 +506,8 @@
                 let tema = window.open('tema.php?sub='+sub.innerHTML,'',' width=400,height=500')
 
                 // Wait for the popup to finish loading
-                tema.onload = function() {
-
+                tema.onload = function(e) {
+                    e.preventDefault();
                     // Attach a function to the popup's form submit event
                     tema.document.getElementById("tema").addEventListener("submit", function(event) {
                         // Prevent the form from submitting normally
@@ -537,7 +535,8 @@
         }
 
         for(let i=0; i<tajuk.length; i++){
-            tajuk[i].onclick = function(){
+            tajuk[i].onclick = function(e){
+                e.preventDefault()
                 getnum = get(i);
                 result = pass(getnum);
 
@@ -576,7 +575,6 @@
                 data: {tajuk:a}, //set data
                 success: function (response) {//once the request successfully process to the server side it will return result here
                     response = JSON.parse(response);
-                    console.log(response)
 
                     response.kdg = response.kdg.replace(/\r\n/g, '<br>');
                     response.cstd = response.cstd.replace(/\r\n/g, '<br>');
@@ -603,16 +601,6 @@
                     apm.innerHTML = response.apm;
                     au.innerHTML = response.au;
                     apn.innerHTML = response.apn;
-
-
-
-                    let period_id = document.querySelector('#period_id');
-                    let preset_id = document.querySelector('#preset_id');
-                    let refleksi_id = document.querySelector('#refleksi_id');
-
-                    period_id.value = response.kdg;
-                    preset_id.value = response.kdg;
-                    refleksi_id.value = response.kdg;
                 }
             });
         }
@@ -1021,7 +1009,6 @@
         let month = document.getElementById('month');
         let year = document.getElementById('year');
         let day = document.getElementById('day');
-        let ans = [];
         let inputRefArray = [];
         let cntArray = [];
 
@@ -1042,9 +1029,9 @@
             let uniqueArray = [];
             uniqueArray.push(uniqueArrays);
             uniqueArray.push(array);
-            console.info(uniqueArray);
 
-            if (penggal.value == '' || minggu.value == '') {
+            if (0) {
+            // if (penggal.value == '' || minggu.value == '') {
             alert("Please fill in the penggal and minggu");
             window.location.replace('#week');
             } else {
@@ -1052,27 +1039,46 @@
                 let input = document.getElementsByClassName('input' + i);
                 let sub = [];
                 let pid = document.getElementById('pid' + i).innerText;
-                sub.push(input[0].value);
+                sub.push(period.value);
+                sub.push(penggal.value);
+                sub.push(minggu.value);
 
-                for (let j = 1; j < 10; j++) {
-                sub.push(input[j].innerText);
+                for (let j = 0; j < 9; j++) {
+                    if (input[j]) {
+                        sub.push(input[j].innerText);
+                    }
                 }
 
-                for (let j = 10; j < 23; j++) {
-                sub.push(input[j].value);
+                for (let j = 9; j < 23; j++) {
+                    if (input[j]) {
+                        sub.push(input[j].value);
+                    }
                 }
 
                 for (let j = 23; j < 24; j++) {
-                sub.push(input[j].innerText);
+                    if (input[j]) {
+                        sub.push(input[j].innerText);
+                    }
                 }
 
                 inputRefArray.push(inputArray.filter(Boolean));
                 cntArray.push(cntInput);
-
-                sub.push(input[26].value);
-
-                ans.push(sub);
-                ans.push(pid);
+                var refleksi = document.getElementById('refleksi');
+                sub.push(refleksi.innerHTML);
+                var tsm = document.getElementById('tsm');
+                sub.push(tsm.value);
+                sub.push(pid);
+                $.ajax({
+                url: 'subject.php',
+                type: 'POST',
+                data: {'data': JSON.stringify(sub),id:0},
+                success:function(data) {
+                    alert(data);
+                },
+                error: function (e) {
+                    alert("Added user failed !!");
+                }
+                });
             }
             }
         });

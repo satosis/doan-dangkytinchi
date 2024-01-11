@@ -141,8 +141,9 @@
 
         <b style="font-size:35px">MyPDP</b>
         <span style="font-size:20px; float: right; margin-right: 80px"><a href="../logout.php">LOGOUT</a></span>
-        <span style="font-size:18px; float: right; margin-right: 50px">ADMIN</span>
-        <span style="font-size:20px; float: right; margin-right: 80px"><a href="../PROJECT.PHP.php">PROJECT</a></span>
+        <span style="font-size:20px; float: right; margin-right: 80px"><a href="../admin/user.php">ADMIN</a></span>
+        <span style="font-size:20px; float: right; margin-right: 80px"><a href="../subject.php">SUBJECT</a></span>
+        <span style="font-size:20px; float: right; margin-right: 80px"><a href="./process.php">PROCESS</a></span>
         <br><hr>
         <br>
         <form action="" method="POST">

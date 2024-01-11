@@ -1248,82 +1248,38 @@ ALTER TABLE `ujian`
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
+--
+-- Table structure for table `project`
+--
 CREATE TABLE `project` (
   `id` int(11) NOT NULL,
-  `period_id` int(11) DEFAULT NULL,
-  `preset_id` int(11) DEFAULT NULL,
-  `emk_id` int(11) DEFAULT NULL,
-  `nilai_id` int(11) DEFAULT NULL,
-  `bbm_id` int(11) DEFAULT NULL,
-  `pemikiran_id` int(11) DEFAULT NULL,
-  `peta_id` int(11) DEFAULT NULL,
-  `tahap_id` int(11) DEFAULT NULL,
-  `akt21_id` int(11) DEFAULT NULL,
-  `p21_id` int(11) DEFAULT NULL,
-  `ujian_id` int(11) DEFAULT NULL,
-  `sub_ujian_id` int(11) DEFAULT NULL,
-  `kemahiran_id` int(11) DEFAULT NULL,
-  `refleksi_id` int(11) DEFAULT NULL,
+  `penggal` varchar(255) DEFAULT NULL,
+  `minggu` varchar(255) DEFAULT NULL,
+  `period` varchar(255) DEFAULT NULL,
+  `preset` varchar(255) DEFAULT NULL,
+  `kdg` varchar(255) DEFAULT NULL,
+  `cstd` varchar(255) DEFAULT NULL,
+  `op` varchar(255) DEFAULT NULL,
+  `kk` varchar(255) DEFAULT NULL,
+  `apm` varchar(255) DEFAULT NULL,
+  `au` varchar(255) DEFAULT NULL,
+  `apn` varchar(255) DEFAULT NULL,
+  `emk` varchar(255) DEFAULT NULL,
+  `nilai` varchar(255) DEFAULT NULL,
+  `bbm` varchar(255) DEFAULT NULL,
+  `pemikiran` varchar(255) DEFAULT NULL,
+  `peta` varchar(255) DEFAULT NULL,
+  `tahap` varchar(255) DEFAULT NULL,
+  `akt21` varchar(255) DEFAULT NULL,
+  `p21` varchar(255) DEFAULT NULL,
+  `ujian` varchar(255) DEFAULT NULL,
+  `sub_ujian` varchar(255) DEFAULT NULL,
+  `kemahiran` varchar(255) DEFAULT NULL,
+  `refleksi` varchar(255) DEFAULT NULL,
   `tsm` varchar(255) DEFAULT NULL,
   `pbd` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `project`
---
-ALTER TABLE `project`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `period_id` (`period_id`),
-  ADD KEY `preset_id` (`preset_id`),
-  ADD KEY `emk_id` (`emk_id`),
-  ADD KEY `nilai_id` (`nilai_id`),
-  ADD KEY `bbm_id` (`bbm_id`),
-  ADD KEY `pemikiran_id` (`pemikiran_id`),
-  ADD KEY `peta_id` (`peta_id`),
-  ADD KEY `tahap_id` (`tahap_id`),
-  ADD KEY `akt21_id` (`akt21_id`),
-  ADD KEY `p21_id` (`p21_id`),
-  ADD KEY `ujian_id` (`ujian_id`),
-  ADD KEY `sub_ujian_id` (`sub_ujian_id`),
-  ADD KEY `kemahiran_id` (`kemahiran_id`),
-  ADD KEY `refleksi_id` (`refleksi_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `project`
---
-ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `project`
---
-ALTER TABLE `project`
-  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`period_id`) REFERENCES `period` (`no`),
-  ADD CONSTRAINT `project_ibfk_10` FOREIGN KEY (`p21_id`) REFERENCES `p21` (`id`),
-  ADD CONSTRAINT `project_ibfk_11` FOREIGN KEY (`ujian_id`) REFERENCES `ujian` (`id`),
-  ADD CONSTRAINT `project_ibfk_12` FOREIGN KEY (`sub_ujian_id`) REFERENCES `ujian` (`id`),
-  ADD CONSTRAINT `project_ibfk_13` FOREIGN KEY (`kemahiran_id`) REFERENCES `kemahiran` (`id`),
-  ADD CONSTRAINT `project_ibfk_14` FOREIGN KEY (`refleksi_id`) REFERENCES `refleksi` (`id`),
-  ADD CONSTRAINT `project_ibfk_2` FOREIGN KEY (`preset_id`) REFERENCES `preset` (`id`),
-  ADD CONSTRAINT `project_ibfk_3` FOREIGN KEY (`emk_id`) REFERENCES `emk` (`id`),
-  ADD CONSTRAINT `project_ibfk_4` FOREIGN KEY (`nilai_id`) REFERENCES `nilai` (`id`),
-  ADD CONSTRAINT `project_ibfk_5` FOREIGN KEY (`bbm_id`) REFERENCES `bbm` (`id`),
-  ADD CONSTRAINT `project_ibfk_6` FOREIGN KEY (`pemikiran_id`) REFERENCES `pemikiran` (`id`),
-  ADD CONSTRAINT `project_ibfk_7` FOREIGN KEY (`peta_id`) REFERENCES `peta` (`id`),
-  ADD CONSTRAINT `project_ibfk_8` FOREIGN KEY (`tahap_id`) REFERENCES `tahap` (`id`),
-  ADD CONSTRAINT `project_ibfk_9` FOREIGN KEY (`akt21_id`) REFERENCES `akt21` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

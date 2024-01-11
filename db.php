@@ -19,4 +19,19 @@ function checkEmailName($conn, $email, $name){
 
 }
 
+function insert($tablename,$values){
+    foreach($values as $keys=>$record){
+        $key_array[] = $keys;
+        $myvalue = $record;
+        if($record == ''){
+            $value_array[] = "'NULL'";
+        }else{
+            $value_array[] = "'".$myvalue."'";
+        }
+    }
+    $keys = implode(",", $key_array);
+    $values = implode(",", $value_array);
+    $sql = "INSERT INTO $tablename ($keys)values($values)";
+    return $sql;
+}
 ?>
