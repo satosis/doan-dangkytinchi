@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="stylesheet" href="nav.css" type="text/css">
     <link rel="stylesheet" href="pmain.css" type="text/css">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -55,8 +55,8 @@
         </nav>
         <br><br><hr><br>
         <h2>PROCESS</h2>
-        
-        <!-- <form action="submit.php" method="POST"> -->
+
+        <form class="form-project" method="POST">
         <?php
             include("db.php");
             $date = $_GET["date"];
@@ -71,13 +71,13 @@
                 <b style="font-size:20px">PENGGAL </b><input id="penggal" style="width:50px; height:25px" type="text" name="penggal" required>
                 <b style="font-size:20px">MINGGU </b> <input id="minggu" style="width:50px; height:25px" type="text" name="minggu" required>
             </section>
-            
+
         <?php
-            
+
             $sql = "SELECT * FROM `period`
             WHERE userId = '$id' AND `day` = '$day' ORDER BY std";
             $result = $conn->query($sql);
-            // echo ($sql); 
+            // echo ($sql);
             // echo "<br>";
             // echo ($result->num_rows);
             if($result->num_rows == 0){
@@ -96,13 +96,14 @@
                 <table class="table" id="pmain">
                 <span id="pid<?php echo $i?>" style="display: none;"><?php echo $row["no"]?></span>
 
-                    
+
 
                     <tr>
                         <td class="col-4">
                             <label for="sub"><b>科目/MATA PELAJARAN:</b></label>
                         </td>
                         <td>
+                            <input type="hidden" name="period_id" value="<?php echo $row["no"] ?>" id="period_id">
                             <b id="<?php echo $row["sub"] ?>"><?php echo $row["sub"] ?></b>
                         </td>
                     </tr>
@@ -122,6 +123,7 @@
                             <label for="tajuk"><b>单元/TAJUK:</b></label>
                         </td>
                         <td>
+                            <input type="hidden" name="preset_id" class="preset_id">
                             <button style="width:50px; height:25px; border-radius: 10px" class="tajuk"><i class="fas fa-angle-right fa-lg"></i></button><br>
                             <span class="input<?php echo $i?>" id="tajuk"></span>
                         </td>
@@ -143,7 +145,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="cstd"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="cstd"></span> 
+                            <span class="input<?php echo $i?>" id="cstd"></span>
                         </td>
                     </tr>
 
@@ -153,7 +155,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="op"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="op"></span> 
+                            <span class="input<?php echo $i?>" id="op"></span>
                         </td>
                     </tr>
 
@@ -163,7 +165,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="kk"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="kk"></span> 
+                            <span class="input<?php echo $i?>" id="kk"></span>
                         </td>
                     </tr>
 
@@ -173,7 +175,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="apm"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="apm"></span> 
+                            <span class="input<?php echo $i?>" id="apm"></span>
                         </td>
                     </tr>
 
@@ -193,7 +195,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="apn"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="apn"></span> 
+                            <span class="input<?php echo $i?>" id="apn"></span>
                         </td>
                     </tr>
 
@@ -202,17 +204,17 @@
                             <label for="emk"><b>跨课程元素/EMK:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="emk" id="emk">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="emk_id" id="emk">
                                 <option value=""></option>
                                     <?php
                                         $sql3 = "SELECT * FROM emk";
                                         $result3 = $conn->query($sql3);
                                         for($a=0;$a<$result3->num_rows;$a++){
                                             $row3 = $result3->fetch_assoc();
-                                            echo"<option value='".$row3['emk']."'>".$row3['emk']."</option>";
+                                            echo"<option value='".$row3['id']."'>".$row3['emk']."</option>";
                                         }
                                     ?>
-                            </select> 
+                            </select>
                         </td>
                     </tr>
 
@@ -221,17 +223,17 @@
                             <label for="nilai"><b>道德价值/NILAI:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="nilai" id="nilai">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="nilai_id" id="nilai">
                                 <option value=""></option>
                                     <?php
                                         $sql4 = "SELECT * FROM nilai";
                                         $result4 = $conn->query($sql4);
                                         for($a=0;$a<$result4->num_rows;$a++){
                                             $row4 = $result4->fetch_assoc();
-                                            echo"<option value='".$row4['nilai']."'>".$row4['nilai']."</option>";
+                                            echo"<option value='".$row4['id']."'>".$row4['nilai']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -240,17 +242,17 @@
                             <label for="abm"><b>教具/ABM/BBM:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="abm" id="abm">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="bbm_id" id="abm">
                                 <option value=""></option>
                                     <?php
                                         $sql5 = "SELECT * FROM bbm";
                                         $result5 = $conn->query($sql5);
                                         for($a=0;$a<$result5->num_rows;$a++){
                                             $row5 = $result5->fetch_assoc();
-                                            echo"<option value='".$row5['bbm']."'>".$row5['bbm']."</option>";
+                                            echo"<option value='".$row5['id']."'>".$row5['bbm']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -259,17 +261,17 @@
                             <label for="kb"><b>思维技能/KEMAHIRAN BERFIKIR:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="kb" id="kb">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="pemikiran_id" id="kb">
                                 <option value=""></option>
                                     <?php
                                         $sql6 = "SELECT * FROM `pemikiran`";
                                         $result6 = $conn->query($sql6);
                                         for($a=0;$a<$result6->num_rows;$a++){
                                             $row6 = $result6->fetch_assoc();
-                                            echo"<option value='".$row6['pemikiran']."'>".$row6['pemikiran']."</option>";
+                                            echo"<option value='".$row6['id']."'>".$row6['pemikiran']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -278,26 +280,26 @@
                             <label for="peta"><b>思路图/PETA i-THINK:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="peta" id="peta">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="peta_id" id="peta">
                                 <option value=""></option>
                                     <?php
                                         $sql8 = "SELECT * FROM `peta`";
                                         $result8 = $conn->query($sql8);
                                         for($a=0;$a<$result8->num_rows;$a++){
                                             $row8 = $result8->fetch_assoc();
-                                            echo"<option value='".$row8['peta']."'>".$row8['peta']."</option>";
+                                            echo"<option value='".$row8['id']."'>".$row8['peta']."</option>";
                                         }
                                     ?>
-                            </select> 
+                            </select>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <label for="tahap"><b>课堂评估/PBD:</b></label>
+                            <label for="pbd"><b>课堂评估/PBD:</b></label>
                         </td>
                         <td>
-                            <input class="input<?php echo $i?> txt" type="text" name="tsm"> 
+                            <input class="input<?php echo $i?> txt" type="text" name="pbd">
                         </td>
                     </tr>
 
@@ -306,17 +308,17 @@
                             <label for="tahap"><b>表现标准/Tahap PBS:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="tahap" id="tahap">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="tahap_id" id="tahap">
                                 <option value=""></option>
                                     <?php
                                         $sql9 = "SELECT * FROM `tahap`";
                                         $result9 = $conn->query($sql9);
                                         for($a=0;$a<$result9->num_rows;$a++){
                                             $row9 = $result9->fetch_assoc();
-                                            echo"<option value='".$row9['tahap']."'>".$row9['tahap']."</option>";
+                                            echo"<option value='".$row9['id']."'>".$row9['tahap']."</option>";
                                         }
                                     ?>
-                            </select> 
+                            </select>
                         </td>
                     </tr>
 
@@ -325,17 +327,17 @@
                             <label for="akt21"><b>21世纪教学法/AKTIVITI PAK 21:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="akt21" id="akt21">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="akt21_id" id="akt21">
                                 <option value=""></option>
                                     <?php
                                         $sql7 = "SELECT * FROM `akt21`";
                                         $result7 = $conn->query($sql7);
                                         for($a=0;$a<$result7->num_rows;$a++){
                                             $row7 = $result7->fetch_assoc();
-                                            echo"<option value='".$row7['aktiviti']."'>".$row7['aktiviti']."</option>";
+                                            echo"<option value='".$row7['id']."'>".$row7['aktiviti']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -344,17 +346,17 @@
                             <label for="p21"><b>21世纪学习法/PAK-21:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="p21" id="p21">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="p21_id" id="p21">
                                 <option value=""></option>
                                     <?php
                                         $sql14 = "SELECT * FROM `p21`";
                                         $result14 = $conn->query($sql14);
                                         for($a=0;$a<$result14->num_rows;$a++){
                                             $row14 = $result14->fetch_assoc();
-                                            echo"<option value='".$row14['p21']."'>".$row14['p21']."</option>";
+                                            echo"<option value='".$row14['id']."'>".$row14['p21']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -363,17 +365,17 @@
                             <label for="praujian"><b>前测/Praujian:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="praujian" id="praujian">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="ujian_id" id="praujian">
                                 <option value=""></option>
                                     <?php
                                         $sql15 = "SELECT * FROM `ujian`";
                                         $result15 = $conn->query($sql15);
                                         for($a=0;$a<$result15->num_rows;$a++){
                                             $row15 = $result15->fetch_assoc();
-                                            echo"<option value='".$row15['type']."'>".$row15['type']."</option>";
+                                            echo"<option value='".$row15['id']."'>".$row15['type']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -382,17 +384,17 @@
                             <label for="pascaujian"><b>后测/Pascaujian:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="pascaujian" id="pascaujian">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="sub_ujian_id" id="pascaujian">
                                 <option value=""></option>
                                     <?php
                                         $sql16 = "SELECT * FROM `ujian`";
                                         $result16 = $conn->query($sql16);
                                         for($a=0;$a<$result16->num_rows;$a++){
                                             $row16 = $result16->fetch_assoc();
-                                            echo"<option value='".$row16['type']."'>".$row16['type']."</option>";
+                                            echo"<option value='".$row16['id']."'>".$row16['type']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -401,17 +403,17 @@
                             <label for="6k"><b>6 种'K'元素/Kemahiran 6K:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="6k" id="6k">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="kemahiran_id" id="6k">
                                 <option value=""></option>
                                     <?php
                                         $sql17 = "SELECT * FROM `kemahiran`";
                                         $result17 = $conn->query($sql17);
                                         for($a=0;$a<$result17->num_rows;$a++){
                                             $row17 = $result17->fetch_assoc();
-                                            echo"<option value='".$row17['kemahiran']."'>".$row17['kemahiran']."</option>";
+                                            echo"<option value='".$row17['id']."'>".$row17['kemahiran']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
 
@@ -420,28 +422,29 @@
                             <label for="aspirasi"><b>学生愿景/Aspirasi Murid:</b></label>
                         </td>
                         <td>
-                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="aspirasi" id="aspirasi">
+                            <select style="width:600px; height:35px" class="input<?php echo $i?>" name="aspirasi_id" id="aspirasi">
                                 <option value=""></option>
                                     <?php
                                         $sql18 = "SELECT * FROM `aspirasi`";
                                         $result18 = $conn->query($sql18);
                                         for($a=0;$a<$result18->num_rows;$a++){
                                             $row18 = $result18->fetch_assoc();
-                                            echo"<option value='".$row18['aspirasi']."'>".$row18['aspirasi']."</option>";
+                                            echo"<option value='".$row18['id']."'>".$row18['aspirasi']."</option>";
                                         }
                                     ?>
-                            </select>  
+                            </select>
                         </td>
                     </tr>
-                    
+
                     <!--Nút-->
                     <tr>
                         <td>
                             <label for="refleksi"><b>反思/REFLEKSI:</b></label>
                         </td>
                         <td>
+                            <input type="hidden" name="refleksi_id" id="refleksi_id">
                             <button style="width:50px; height:25px; border-radius: 10px" class="refleksi"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="refleksi"></span><br> 
+                            <span class="input<?php echo $i?>" id="refleksi"></span><br>
                             <span class="input<?php echo $i?>" id="inputRefleksi"></span>
                         </td>
                     </tr>
@@ -460,7 +463,7 @@
                             <label for="tsm"><b>后续作业/TUGASAN SUSULAN MURID:</b></label>
                         </td>
                         <td>
-                            <input class="input<?php echo $i?> txt" type="text" name="tsm"> 
+                            <input class="input<?php echo $i?> txt" type="text" name="tsm">
                         </td>
                     </tr>
                 </table>
@@ -471,7 +474,7 @@
 
                 }
             }
-                
+
             ?>
         <button type="submit" class="me-5 px-5 py-2 btn btn-primary" name="submit" id='submit'>SUBMIT</button>
         <br>
@@ -479,7 +482,7 @@
 
     </body>
 
-    <script>    
+    <script>
         let t = document.getElementsByClassName('tema');
         let tajuk = document.getElementsByClassName('tajuk');
 
@@ -495,10 +498,10 @@
         }
 
         for(let i=0; i<t.length; i++){
-            
+
             t[i].onclick = function(){
                 getnum = get(i);
-                result = pass(getnum);               
+                result = pass(getnum);
                 // alert(t[i].id)
 
                 let sub = document.getElementById(t[i].id);
@@ -527,9 +530,9 @@
 
         function tema(formData) {
             // Do something with the form data
-            let a = (formData.get("tema")); 
-            // console.log("tema" + result); 
-            let tema = document.querySelector('#tema.input'+result);      
+            let a = (formData.get("tema"));
+            // console.log("tema" + result);
+            let tema = document.querySelector('#tema.input'+result);
             tema.innerHTML = a;
         }
 
@@ -555,16 +558,16 @@
                         });
                     };
                 }
-                
+
             }
         }
-        
+
         function tjk(formData) {
             // Do something with the form data
             // console.log(formData.get("tajuk"));
-            let a = (formData.get("tajuk"));  
-            // console.log("tjk" + result); 
-            let taj = document.querySelector('#tajuk.input'+result);      
+            let a = (formData.get("tajuk"));
+            // console.log("tjk" + result);
+            let taj = document.querySelector('#tajuk.input'+result);
             taj.innerHTML = a;
 
             $.ajax({
@@ -584,14 +587,14 @@
                     response.apn = response.apn.replace(/\r\n/g, '<br>');
 
                     let kdg = document.querySelector('#kdg.input'+result);
-                    let cstd = document.querySelector('#cstd.input'+result);  
-                    let op = document.querySelector('#op.input'+result);  
-                    let kk = document.querySelector('#kk.input'+result);  
-                    let apm = document.querySelector('#apm.input'+result);  
-                    let au = document.querySelector('#au.input'+result);  
-                    let apn = document.querySelector('#apn.input'+result);  
-                    let refleksi = document.querySelector('#refleksi.input'+result);  
-                    let inputRef = document.querySelector('#inputRefleksi.input'+result); 
+                    let cstd = document.querySelector('#cstd.input'+result);
+                    let op = document.querySelector('#op.input'+result);
+                    let kk = document.querySelector('#kk.input'+result);
+                    let apm = document.querySelector('#apm.input'+result);
+                    let au = document.querySelector('#au.input'+result);
+                    let apn = document.querySelector('#apn.input'+result);
+                    let refleksi = document.querySelector('#refleksi.input'+result);
+                    let inputRef = document.querySelector('#inputRefleksi.input'+result);
 
                     kdg.innerHTML = response.kdg;
                     cstd.innerHTML = response.cstd;
@@ -600,6 +603,16 @@
                     apm.innerHTML = response.apm;
                     au.innerHTML = response.au;
                     apn.innerHTML = response.apn;
+
+
+
+                    let period_id = document.querySelector('#period_id');
+                    let preset_id = document.querySelector('#preset_id');
+                    let refleksi_id = document.querySelector('#refleksi_id');
+
+                    period_id.value = response.kdg;
+                    preset_id.value = response.kdg;
+                    refleksi_id.value = response.kdg;
                 }
             });
         }
@@ -644,12 +657,12 @@
 
         function kdgpage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("kdg"));  
-            // console.log(a.length); 
-            // console.log("kdg" + result); 
+            let a = (formData.getAll("kdg"));
+            // console.log(a.length);
+            // console.log("kdg" + result);
             let kdg = document.querySelector('#kdg.input'+result);
             let separator =  "<br>";
-            let kandungan = a.join(separator);      
+            let kandungan = a.join(separator);
             // console.log(kandungan);
             kdg.innerHTML = kandungan;
         }
@@ -668,7 +681,7 @@
                 if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                     alert("Please select the 'tajuk' ")
                 }else{
-                    let cstd = document.querySelector('#cstd.input'+result);  
+                    let cstd = document.querySelector('#cstd.input'+result);
                     let cstdpage = window.open('cstd.php?cstd='+cstd.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     cstdpage.onload = function() {
@@ -685,12 +698,12 @@
 
         function cstdpage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("cstd"));  
-            // console.log(a); 
-            // console.log("cstd" + result); 
-            let cstd = document.querySelector('#cstd.input'+result);  
+            let a = (formData.getAll("cstd"));
+            // console.log(a);
+            // console.log("cstd" + result);
+            let cstd = document.querySelector('#cstd.input'+result);
             let separator =  "<br>";
-            let standard = a.join(separator);      
+            let standard = a.join(separator);
             // console.log(standard);
             cstd.innerHTML = standard;
         }
@@ -700,7 +713,7 @@
             opbtn[i].onclick = function(){
                 getnum = get(i);
                 result = pass(getnum);
-                
+
                 let sub = document.getElementById(t[i].id);
                 let tema = document.querySelector('#tema.input'+result);
                 let tajuk = document.querySelector('#tajuk.input'+result);
@@ -709,7 +722,7 @@
                 if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                     alert("Please select the 'tajuk' ")
                 }else{
-                    let op = document.querySelector('#op.input'+result);  
+                    let op = document.querySelector('#op.input'+result);
                     let oppage = window.open('op.php?op='+op.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     oppage.onload = function() {
@@ -726,12 +739,12 @@
 
         function oppage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("op"));  
-            // console.log(a); 
-            // console.log("op" + result); 
-            let op = document.querySelector('#op.input'+result);  
+            let a = (formData.getAll("op"));
+            // console.log(a);
+            // console.log("op" + result);
+            let op = document.querySelector('#op.input'+result);
             let separator =  "<br>";
-            let obj = a.join(separator);      
+            let obj = a.join(separator);
             // console.log(obj);
             op.innerHTML = obj;
         }
@@ -741,7 +754,7 @@
             kkbtn[i].onclick = function(){
                 getnum = get(i);
                 result = pass(getnum);
-                
+
                 let sub = document.getElementById(t[i].id);
                 let tema = document.querySelector('#tema.input'+result);
                 let tajuk = document.querySelector('#tajuk.input'+result);
@@ -750,7 +763,7 @@
                 if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                     alert("Please select the 'tajuk' ")
                 }else{
-                    let kk = document.querySelector('#kk.input'+result);  
+                    let kk = document.querySelector('#kk.input'+result);
                     let kkpage = window.open('kk.php?kk='+kk.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     kkpage.onload = function() {
@@ -767,12 +780,12 @@
 
         function kkpage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("kk"));  
-            // console.log(a); 
-            // console.log("kk" + result); 
-            let kk = document.querySelector('#kk.input'+result);  
+            let a = (formData.getAll("kk"));
+            // console.log(a);
+            // console.log("kk" + result);
+            let kk = document.querySelector('#kk.input'+result);
             let separator =  "<br>";
-            let kriteria = a.join(separator);      
+            let kriteria = a.join(separator);
             // console.log(kriteria);
             kk.innerHTML = kriteria;
         }
@@ -782,7 +795,7 @@
             apmbtn[i].onclick = function(){
                 getnum = get(i);
                 result = pass(getnum);
-                
+
                 let sub = document.getElementById(t[i].id);
                 let tema = document.querySelector('#tema.input'+result);
                 let tajuk = document.querySelector('#tajuk.input'+result);
@@ -791,7 +804,7 @@
                 if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                     alert("Please select the 'tajuk' ")
                 }else{
-                    let apm = document.querySelector('#apm.input'+result);  
+                    let apm = document.querySelector('#apm.input'+result);
                     let apmpage = window.open('apm.php?apm='+apm.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     apmpage.onload = function() {
@@ -808,12 +821,12 @@
 
         function apmpage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("apm"));  
-            // console.log(a); 
-            // console.log("apm" + result); 
-            let apm = document.querySelector('#apm.input'+result);  
+            let a = (formData.getAll("apm"));
+            // console.log(a);
+            // console.log("apm" + result);
+            let apm = document.querySelector('#apm.input'+result);
             let separator =  "<br>";
-            let mula = a.join(separator);      
+            let mula = a.join(separator);
             // console.log(mula);
             apm.innerHTML = mula;
         }
@@ -823,7 +836,7 @@
             aubtn[i].onclick = function(){
                 getnum = get(i);
                 result = pass(getnum);
-                
+
                 let sub = document.getElementById(t[i].id);
                 let tema = document.querySelector('#tema.input'+result);
                 let tajuk = document.querySelector('#tajuk.input'+result);
@@ -832,7 +845,7 @@
                 if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                     alert("Please select the 'tajuk' ")
                 }else{
-                    let au = document.querySelector('#au.input'+result);  
+                    let au = document.querySelector('#au.input'+result);
                     let aupage = window.open('au.php?au='+au.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     aupage.onload = function() {
@@ -849,12 +862,12 @@
 
         function aupage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("au"));  
-            // console.log(a); 
-            // console.log("au" + result); 
-            let au = document.querySelector('#au.input'+result);  
+            let a = (formData.getAll("au"));
+            // console.log(a);
+            // console.log("au" + result);
+            let au = document.querySelector('#au.input'+result);
             let separator =  "<br>";
-            let utama = a.join(separator);      
+            let utama = a.join(separator);
             // console.log(utama);
             au.innerHTML = utama;
         }
@@ -864,7 +877,7 @@
             apnbtn[i].onclick = function(){
                 getnum = get(i);
                 result = pass(getnum);
-                
+
                 let sub = document.getElementById(t[i].id);
                 let tema = document.querySelector('#tema.input'+result);
                 let tajuk = document.querySelector('#tajuk.input'+result);
@@ -873,7 +886,7 @@
                 if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                     alert("Please select the 'tajuk' ")
                 }else{
-                    let apn = document.querySelector('#apn.input'+result);  
+                    let apn = document.querySelector('#apn.input'+result);
                     let apnpage = window.open('apn.php?apn='+apn.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     apnpage.onload = function() {
@@ -890,12 +903,12 @@
 
         function apnpage(formData) {
             // Do something with the form data
-            let a = (formData.getAll("apn"));  
-            // console.log(a); 
-            // console.log("apn" + result); 
-            let apn = document.querySelector('#apn.input'+result);  
+            let a = (formData.getAll("apn"));
+            // console.log(a);
+            // console.log("apn" + result);
+            let apn = document.querySelector('#apn.input'+result);
             let separator =  "<br>";
-            let tutup = a.join(separator);      
+            let tutup = a.join(separator);
             // console.log(standard);
             apn.innerHTML = tutup;
         }
@@ -905,7 +918,7 @@
             refleksibtn[i].onclick = function(){
                 getnum = get(i);
                 result = pass(getnum);
-                
+
                 let sub = document.getElementById(t[i].id);
                 let tema = document.querySelector('#tema.input'+result);
                 let tajuk = document.querySelector('#tajuk.input'+result);
@@ -914,7 +927,7 @@
                 // if(tajuk.innerText.trim() == "" || tajuk.innerText == null){
                 //     alert("Please select the 'tajuk' ")
                 // }else{
-                    let refleksi = document.querySelector('#refleksi.input'+result);  
+                    let refleksi = document.querySelector('#refleksi.input'+result);
                     let refleksipage = window.open('refleksi.php?refleksi='+refleksi.innerHTML+'&sub='+sub.innerHTML,'',' width=400,height=500')
 
                     refleksipage.onload = function() {
@@ -928,7 +941,7 @@
                 // }
             }
         }
-        
+
         let int = "";
         let input = "";
         let inputArray = [];
@@ -1035,7 +1048,6 @@
             alert("Please fill in the penggal and minggu");
             window.location.replace('#week');
             } else {
-            alert(table.length)
             for (let i = 0; i < table.length; i++) {
                 let input = document.getElementsByClassName('input' + i);
                 let sub = [];
