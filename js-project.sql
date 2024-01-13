@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2023 at 01:44 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Jan 13, 2024 at 10:31 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `akt21` (
   `id` int(11) NOT NULL,
   `aktiviti` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `akt21`
@@ -166,7 +166,7 @@ CREATE TABLE `apm` (
   `id` int(11) NOT NULL,
   `apm` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `apm`
@@ -192,7 +192,7 @@ CREATE TABLE `apn` (
   `id` int(11) NOT NULL,
   `apn` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `apn`
@@ -210,7 +210,7 @@ INSERT INTO `apn` (`id`, `apn`, `sub`) VALUES
 CREATE TABLE `aspirasi` (
   `id` int(11) NOT NULL,
   `aspirasi` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `aspirasi`
@@ -234,7 +234,7 @@ CREATE TABLE `au` (
   `id` int(11) NOT NULL,
   `au` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `au`
@@ -324,7 +324,7 @@ INSERT INTO `au` (`id`, `au`, `sub`) VALUES
 CREATE TABLE `bbm` (
   `id` int(11) NOT NULL,
   `bbm` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bbm`
@@ -400,7 +400,7 @@ CREATE TABLE `calendar` (
   `pDate` date DEFAULT NULL,
   `minggu` int(11) NOT NULL,
   `penggal` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -445,7 +445,7 @@ CREATE TABLE `content` (
   `refleksi` varchar(255) NOT NULL,
   `inputRef` varchar(255) NOT NULL,
   `tsm` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -457,7 +457,7 @@ CREATE TABLE `cstd` (
   `id` int(11) NOT NULL,
   `cstd` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cstd`
@@ -493,7 +493,7 @@ INSERT INTO `cstd` (`id`, `cstd`, `sub`) VALUES
 CREATE TABLE `emk` (
   `id` int(11) NOT NULL,
   `emk` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `emk`
@@ -527,7 +527,7 @@ CREATE TABLE `kdg` (
   `id` int(11) NOT NULL,
   `kdg` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kdg`
@@ -551,7 +551,7 @@ INSERT INTO `kdg` (`id`, `kdg`, `sub`) VALUES
 CREATE TABLE `kemahiran` (
   `id` int(11) NOT NULL,
   `kemahiran` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kemahiran`
@@ -575,7 +575,7 @@ CREATE TABLE `kk` (
   `id` int(11) NOT NULL,
   `kk` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kk`
@@ -611,7 +611,7 @@ INSERT INTO `kk` (`id`, `kk`, `sub`) VALUES
 CREATE TABLE `nilai` (
   `id` int(11) NOT NULL,
   `nilai` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `nilai`
@@ -656,7 +656,7 @@ CREATE TABLE `op` (
   `id` int(11) NOT NULL,
   `op` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `op`
@@ -691,7 +691,7 @@ INSERT INTO `op` (`id`, `op`, `sub`) VALUES
 CREATE TABLE `p21` (
   `id` int(11) NOT NULL,
   `p21` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `p21`
@@ -722,7 +722,7 @@ INSERT INTO `p21` (`id`, `p21`) VALUES
 CREATE TABLE `pemikiran` (
   `id` int(11) NOT NULL,
   `pemikiran` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pemikiran`
@@ -752,7 +752,7 @@ CREATE TABLE `period` (
   `start` varchar(255) NOT NULL,
   `end` varchar(255) NOT NULL,
   `noStu` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `period`
@@ -765,7 +765,10 @@ INSERT INTO `period` (`no`, `userId`, `day`, `std`, `sub`, `class`, `start`, `en
 (10, 1, '2', 4, '音乐', '1M', '18:59', '18:59', 30),
 (11, 1, '2', 1, '音乐', '1M', '19:01', '19:01', 30),
 (12, 1, '0', 1, '音乐', '1M', '20:18', '20:18', 30),
-(13, 1, '1', 1, '音乐', '1M', '21:27', '21:27', 30);
+(13, 1, '1', 1, '音乐', '1M', '21:27', '21:27', 30),
+(14, 3, '0', 2, 'BAHASA MELAYU', '123', '09:49', '09:49', 213),
+(15, 3, '0', 1, '音乐', '12', '10:06', '10:06', 12),
+(16, 3, '1', 1, '音乐', '12', '10:06', '10:06', 12);
 
 -- --------------------------------------------------------
 
@@ -776,7 +779,7 @@ INSERT INTO `period` (`no`, `userId`, `day`, `std`, `sub`, `class`, `start`, `en
 CREATE TABLE `peta` (
   `id` int(11) NOT NULL,
   `peta` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `peta`
@@ -810,7 +813,7 @@ CREATE TABLE `preset` (
   `apm` varchar(255) NOT NULL,
   `au` varchar(255) NOT NULL,
   `apn` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `preset`
@@ -854,6 +857,48 @@ INSERT INTO `preset` (`id`, `subject`, `tema`, `tajuk`, `kdg`, `cstd`, `op`, `kk
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `project`
+--
+
+CREATE TABLE `project` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `userId` varchar(255) DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `day` varchar(255) DEFAULT NULL,
+  `penggal` varchar(255) DEFAULT NULL,
+  `minggu` varchar(255) DEFAULT NULL,
+  `period` varchar(255) DEFAULT NULL,
+  `tema` varchar(255) DEFAULT NULL,
+  `preset` varchar(255) DEFAULT NULL,
+  `kdg` varchar(255) DEFAULT NULL,
+  `cstd` varchar(255) DEFAULT NULL,
+  `op` varchar(255) DEFAULT NULL,
+  `kk` varchar(255) DEFAULT NULL,
+  `apm` varchar(255) DEFAULT NULL,
+  `au` varchar(255) DEFAULT NULL,
+  `apn` varchar(255) DEFAULT NULL,
+  `emk` varchar(255) DEFAULT NULL,
+  `nilai` varchar(255) DEFAULT NULL,
+  `bbm` varchar(255) DEFAULT NULL,
+  `pemikiran` varchar(255) DEFAULT NULL,
+  `peta` varchar(255) DEFAULT NULL,
+  `tahap` varchar(255) DEFAULT NULL,
+  `akt21` varchar(255) DEFAULT NULL,
+  `p21` varchar(255) DEFAULT NULL,
+  `ujian` varchar(255) DEFAULT NULL,
+  `sub_ujian` varchar(255) DEFAULT NULL,
+  `kemahiran` varchar(255) DEFAULT NULL,
+  `aspirasi` varchar(255) DEFAULT NULL,
+  `refleksi` varchar(255) DEFAULT NULL,
+  `tsm` varchar(255) DEFAULT NULL,
+  `pbd` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `refleksi`
 --
 
@@ -862,7 +907,7 @@ CREATE TABLE `refleksi` (
   `refleksi` varchar(255) NOT NULL,
   `sub` varchar(255) NOT NULL,
   `input` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `refleksi`
@@ -891,7 +936,7 @@ INSERT INTO `refleksi` (`id`, `refleksi`, `sub`, `input`) VALUES
 CREATE TABLE `tahap` (
   `id` int(11) NOT NULL,
   `tahap` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tahap`
@@ -914,7 +959,7 @@ INSERT INTO `tahap` (`id`, `tahap`) VALUES
 CREATE TABLE `ujian` (
   `id` int(11) NOT NULL,
   `type` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ujian`
@@ -948,7 +993,7 @@ CREATE TABLE `user` (
   `hp` varchar(255) NOT NULL,
   `credit` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -956,7 +1001,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `email`, `username`, `password`, `hp`, `credit`, `status`) VALUES
 (1, 'aaa@gmail.com', 'aaa', '*A02AA727CF2E8C5E6F07A382910C4028D65A053A', '1234567890', 2, 1),
-(2, 'bbb@gmail.com', 'bbb', '*8BE34F24D29E7B61EE00E4D5AADAE5CBC713D120', '0987654321', 0, 1);
+(2, 'bbb@gmail.com', 'bbb', '*8BE34F24D29E7B61EE00E4D5AADAE5CBC713D120', '0987654321', 0, 1),
+(3, 'caa@gmail.com', 'fefeaf', '*97E7471D816A37E38510728AEA47440F9C6E2585', 'e21e12', 123, 1);
 
 --
 -- Indexes for dumped tables
@@ -1081,6 +1127,12 @@ ALTER TABLE `peta`
 --
 ALTER TABLE `preset`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `refleksi`
@@ -1216,13 +1268,19 @@ ALTER TABLE `pemikiran`
 -- AUTO_INCREMENT for table `period`
 --
 ALTER TABLE `period`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `peta`
 --
 ALTER TABLE `peta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `refleksi`
@@ -1246,48 +1304,7 @@ ALTER TABLE `ujian`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Table structure for table `project`
---
-CREATE TABLE `project` (
-  `id` int(11)  UNSIGNED NOT NULL AUTO_INCREMENT,
-  `userId` varchar(255),
-  `year` varchar(255),
-  `month` varchar(255),
-  `date` varchar(255),
-  `day` varchar(255),
-  `penggal` varchar(255),
-  `minggu` varchar(255),
-  `period` varchar(255),
-  `tema` varchar(255),
-  `preset` varchar(255),
-  `kdg` varchar(255),
-  `cstd` varchar(255),
-  `op` varchar(255),
-  `kk` varchar(255),
-  `apm` varchar(255),
-  `au` varchar(255),
-  `apn` varchar(255),
-  `emk` varchar(255),
-  `nilai` varchar(255),
-  `bbm` varchar(255),
-  `pemikiran` varchar(255),
-  `peta` varchar(255),
-  `tahap` varchar(255),
-  `akt21` varchar(255),
-  `p21` varchar(255),
-  `ujian` varchar(255),
-  `sub_ujian` varchar(255),
-  `kemahiran` varchar(255),
-  `aspirasi` varchar(255),
-  `refleksi` varchar(255),
-  `tsm` varchar(255),
-  `pbd` varchar(255),
-     KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
