@@ -1,6 +1,7 @@
 <?php
 include("db.php");
 
+if (isset($_GET["sub"])) {
 $sub = $_GET["sub"];
 $sql = "SELECT DISTINCT `tema` FROM `preset` WHERE '$sub' = `subject` ";
 $result = $conn->query($sql);
@@ -13,5 +14,5 @@ for($a=0;$a<$result->num_rows;$a++){
 
 echo "<input style='margin:10px 0 10px 20px' name='submit' type='submit' value='SUBMIT'>";
 echo "</form>";
-
+}
 ?>

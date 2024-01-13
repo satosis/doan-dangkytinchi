@@ -3,10 +3,10 @@
     $id = $_GET["id"];
     //print_r($_GET);
 
-    $sql = "DELETE FROM `period` WHERE `no` = '$id'";
+    $sql = "DELETE FROM `project` WHERE `id` = '$id'";
 
     if($conn->query($sql)===TRUE){
-        header("Location:period.php");
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }else{
         echo "Fail to delete, ".$conn->error;
     }

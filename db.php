@@ -34,4 +34,14 @@ function insert($tablename,$values){
     $sql = "INSERT INTO $tablename ($keys)values($values)";
     return $sql;
 }
+
+function update($id, $tablename,$values){
+    $arrayValues = $values;
+    array_walk($values, function(&$value, $key){
+        $value = "{$key} = '{$value}'";
+    });
+    $sUpdate = implode(", ", array_values($values));
+    $sql = "UPDATE {$tablename} SET {$sUpdate} WHERE id = $id";
+    return $sql;
+}
 ?>

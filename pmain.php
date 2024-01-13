@@ -46,7 +46,7 @@
             </label>
             <label class="logo">MyPDP</label>
             <ul class="ul">
-                <li><?php echo $_COOKIE["username"];?></li>
+                <li><?php if(isset($_COOKIE["username"])) echo $_COOKIE["username"];?></li>
                 <li><a href="period.php">SETTING</a></li>
                 <li><a href="process.php">PROCESS</a></li>
                 <li><a href="print.php">PRINT</a></li>
@@ -59,23 +59,39 @@
         <form class="form-project" method="POST">
         <?php
             include("db.php");
-            $date = $_GET["date"];
-            $month = $_GET["month"];
-            $year = $_GET["year"];
-            $day = $_GET["day"];
-            $id = 1;
+            $userId = 0;
+            $id = 0;
+            if (isset($_GET["date"])) $date = $_GET["date"];
+            if (isset($_GET["month"])) $month = $_GET["month"];
+            if (isset($_GET["year"])) $year = $_GET["year"];
+            if (isset($_GET["day"])) $day = $_GET["day"];
+            if (isset($_COOKIE["id"])) $userId = $_COOKIE["id"];
+            if (isset($_GET["id"])){
+                $id = $_GET["id"];
+                $sql = "SELECT * FROM `project` WHERE `id` = '$id' ";
+                $result = $conn->query($sql);
+                $project = $result->fetch_assoc();
+                $date = $project["date"];
+                $month = $project["month"];
+                $year = $project["year"];
+                $day = $project["day"];
+                $userId = $project["userId"];
+            }
         ?>
 
             <section id="week">
                 <?php echo "<h3><span id='date'>$date</span>&nbsp;<span id='month'>$month</span>&nbsp;<span id='year'>$year</span><span id='day' style='display:none'>$day</span></h3>"; ?>
-                <b style="font-size:20px">PENGGAL </b><input id="penggal" style="width:50px; height:25px" type="text" name="penggal" required>
-                <b style="font-size:20px">MINGGU </b> <input id="minggu" style="width:50px; height:25px" type="text" name="minggu" required>
+                <b style="font-size:20px">PENGGAL </b><input id="penggal" value='<?php if(isset($project)) echo $project["penggal"] ?>' style="width:50px; height:25px" type="text" name="penggal" required>
+                <b style="font-size:20px">MINGGU </b> <input id="minggu" value='<?php if(isset($project)) echo $project["minggu"] ?>' style="width:50px; height:25px" type="text" name="minggu" required>
             </section>
 
         <?php
-
-            $sql = "SELECT * FROM `period`
-            WHERE userId = '$id' AND `day` = '$day' ORDER BY std";
+            $sql = "SELECT * FROM `period` WHERE `day` = '$day' ORDER BY std";
+            if ($userId) {
+                $sql = "SELECT * FROM `period`
+                WHERE userId = '$userId' AND `day` = '$day' ORDER BY std";
+            }
+            // WHERE userId = '$userId' AND `day` = '$day' ORDER BY std";
             $result = $conn->query($sql);
             // echo ($sql);
             // echo "<br>";
@@ -114,7 +130,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" id="<?php echo $row["sub"] ?>" class="tema"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="tema"></span>
+                            <span class="input<?php echo $i?>" id="tema"><?php if(isset($project)) echo $project["tema"] ?></span>
                         </td>
                     </tr>
 
@@ -123,9 +139,8 @@
                             <label for="tajuk"><b>单元/TAJUK:</b></label>
                         </td>
                         <td>
-                            <input type="hidden" name="preset_id" class="preset_id">
                             <button style="width:50px; height:25px; border-radius: 10px" class="tajuk"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="tajuk"></span>
+                            <span class="input<?php echo $i?>" id="tajuk"><?php if(isset($project)) echo $project["preset"] ?></span>
                         </td>
                     </tr>
 
@@ -135,7 +150,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="kdg"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="kdg"></span>
+                            <span class="input<?php echo $i?>" id="kdg"><?php if(isset($project)) echo $project["kdg"] ?></span>
                         </td>
                     </tr>
 
@@ -145,7 +160,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="cstd"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="cstd"></span>
+                            <span class="input<?php echo $i?>" id="cstd"><?php if(isset($project)) echo $project["cstd"] ?></span>
                         </td>
                     </tr>
 
@@ -155,7 +170,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="op"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="op"></span>
+                            <span class="input<?php echo $i?>" id="op"><?php if(isset($project)) echo $project["op"] ?></span>
                         </td>
                     </tr>
 
@@ -165,7 +180,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="kk"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="kk"></span>
+                            <span class="input<?php echo $i?>" id="kk"><?php if(isset($project)) echo $project["kk"] ?></span>
                         </td>
                     </tr>
 
@@ -175,7 +190,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="apm"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="apm"></span>
+                            <span class="input<?php echo $i?>" id="apm"><?php if(isset($project)) echo $project["apm"] ?></span>
                         </td>
                     </tr>
 
@@ -185,7 +200,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="au"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="au"></span>
+                            <span class="input<?php echo $i?>" id="au"><?php if(isset($project)) echo $project["au"] ?></span>
                         </td>
                     </tr>
 
@@ -195,7 +210,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="apn"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="apn"></span>
+                            <span class="input<?php echo $i?>" id="apn"><?php if(isset($project)) echo $project["apn"] ?></span>
                         </td>
                     </tr>
 
@@ -211,7 +226,11 @@
                                         $result3 = $conn->query($sql3);
                                         for($a=0;$a<$result3->num_rows;$a++){
                                             $row3 = $result3->fetch_assoc();
-                                            echo"<option value='".$row3['id']."'>".$row3['emk']."</option>";
+                                            if(isset($project) && $project['emk'] == $row3['id']) {
+                                                echo"<option value='".$row3['id']."' selected>".$row3['emk']."</option>";
+                                            } else {
+                                                echo"<option value='".$row3['id']."'>".$row3['emk']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -230,7 +249,12 @@
                                         $result4 = $conn->query($sql4);
                                         for($a=0;$a<$result4->num_rows;$a++){
                                             $row4 = $result4->fetch_assoc();
-                                            echo"<option value='".$row4['id']."'>".$row4['nilai']."</option>";
+
+                                            if(isset($project) && $project['nilai'] == $row4['id']) {
+                                                echo"<option value='".$row4['id']."' selected>".$row4['nilai']."</option>";
+                                            } else {
+                                                echo"<option value='".$row4['id']."'>".$row4['nilai']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -249,7 +273,11 @@
                                         $result5 = $conn->query($sql5);
                                         for($a=0;$a<$result5->num_rows;$a++){
                                             $row5 = $result5->fetch_assoc();
-                                            echo"<option value='".$row5['id']."'>".$row5['bbm']."</option>";
+                                            if(isset($project) && $project['bbm'] == $row5['id']) {
+                                                echo"<option value='".$row5['id']."' selected>".$row5['bbm']."</option>";
+                                            } else {
+                                                echo"<option value='".$row5['id']."'>".$row5['bbm']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -268,7 +296,11 @@
                                         $result6 = $conn->query($sql6);
                                         for($a=0;$a<$result6->num_rows;$a++){
                                             $row6 = $result6->fetch_assoc();
-                                            echo"<option value='".$row6['id']."'>".$row6['pemikiran']."</option>";
+                                            if(isset($project) && $project['pemikiran'] == $row6['id']) {
+                                                echo"<option value='".$row6['id']."' selected>".$row6['pemikiran']."</option>";
+                                            } else {
+                                                echo"<option value='".$row6['id']."'>".$row6['pemikiran']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -287,7 +319,12 @@
                                         $result8 = $conn->query($sql8);
                                         for($a=0;$a<$result8->num_rows;$a++){
                                             $row8 = $result8->fetch_assoc();
-                                            echo"<option value='".$row8['id']."'>".$row8['peta']."</option>";
+
+                                            if(isset($project) && $project['peta'] == $row8['id']) {
+                                                echo"<option value='".$row8['id']."' selected>".$row8['peta']."</option>";
+                                            } else {
+                                                echo"<option value='".$row8['id']."'>".$row8['peta']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -299,7 +336,7 @@
                             <label for="pbd"><b>课堂评估/PBD:</b></label>
                         </td>
                         <td>
-                            <input class="input<?php echo $i?> txt" type="text" name="pbd">
+                            <input class="input<?php echo $i?> txt" type="text" name="pbd" value='<?php if(isset($project)) echo $project["pbd"] ?>'>
                         </td>
                     </tr>
 
@@ -315,7 +352,11 @@
                                         $result9 = $conn->query($sql9);
                                         for($a=0;$a<$result9->num_rows;$a++){
                                             $row9 = $result9->fetch_assoc();
-                                            echo"<option value='".$row9['id']."'>".$row9['tahap']."</option>";
+                                            if(isset($project) && $project['tahap'] == $row9['id']) {
+                                                echo"<option value='".$row9['id']."' selected>".$row9['tahap']."</option>";
+                                            } else {
+                                                echo"<option value='".$row9['id']."'>".$row9['tahap']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -334,7 +375,11 @@
                                         $result7 = $conn->query($sql7);
                                         for($a=0;$a<$result7->num_rows;$a++){
                                             $row7 = $result7->fetch_assoc();
-                                            echo"<option value='".$row7['id']."'>".$row7['aktiviti']."</option>";
+                                            if(isset($project) && $project['akt21'] == $row7['id']) {
+                                                echo"<option value='".$row7['id']."' selected>".$row7['aktiviti']."</option>";
+                                            } else {
+                                                echo"<option value='".$row7['id']."'>".$row7['aktiviti']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -353,7 +398,12 @@
                                         $result14 = $conn->query($sql14);
                                         for($a=0;$a<$result14->num_rows;$a++){
                                             $row14 = $result14->fetch_assoc();
-                                            echo"<option value='".$row14['id']."'>".$row14['p21']."</option>";
+
+                                            if(isset($project) && $project['p21'] == $row14['id']) {
+                                                echo"<option value='".$row14['id']."' selected>".$row14['p21']."</option>";
+                                            } else {
+                                                echo"<option value='".$row14['id']."'>".$row14['p21']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -372,7 +422,12 @@
                                         $result15 = $conn->query($sql15);
                                         for($a=0;$a<$result15->num_rows;$a++){
                                             $row15 = $result15->fetch_assoc();
-                                            echo"<option value='".$row15['id']."'>".$row15['type']."</option>";
+
+                                            if(isset($project) && $project['ujian'] == $row15['id']) {
+                                                echo"<option value='".$row15['id']."' selected>".$row15['type']."</option>";
+                                            } else {
+                                                echo"<option value='".$row15['id']."'>".$row15['type']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -391,7 +446,12 @@
                                         $result16 = $conn->query($sql16);
                                         for($a=0;$a<$result16->num_rows;$a++){
                                             $row16 = $result16->fetch_assoc();
-                                            echo"<option value='".$row16['id']."'>".$row16['type']."</option>";
+
+                                            if(isset($project) && $project['sub_ujian'] == $row16['id']) {
+                                                echo"<option value='".$row16['id']."' selected>".$row16['type']."</option>";
+                                            } else {
+                                                echo"<option value='".$row16['id']."'>".$row16['type']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -411,6 +471,12 @@
                                         for($a=0;$a<$result17->num_rows;$a++){
                                             $row17 = $result17->fetch_assoc();
                                             echo"<option value='".$row17['id']."'>".$row17['kemahiran']."</option>";
+
+                                            if(isset($project) && $project['kemahiran'] == $row17['id']) {
+                                                echo"<option value='".$row17['id']."' selected>".$row17['kemahiran']."</option>";
+                                            } else {
+                                                echo"<option value='".$row17['id']."'>".$row17['kemahiran']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -429,7 +495,12 @@
                                         $result18 = $conn->query($sql18);
                                         for($a=0;$a<$result18->num_rows;$a++){
                                             $row18 = $result18->fetch_assoc();
-                                            echo"<option value='".$row18['id']."'>".$row18['aspirasi']."</option>";
+
+                                            if(isset($project) && $project['aspirasi'] == $row18['id']) {
+                                                echo"<option value='".$row18['id']."' selected>".$row18['aspirasi']."</option>";
+                                            } else {
+                                                echo"<option value='".$row18['id']."'>".$row18['aspirasi']."</option>";
+                                            }
                                         }
                                     ?>
                             </select>
@@ -443,7 +514,7 @@
                         </td>
                         <td>
                             <button style="width:50px; height:25px; border-radius: 10px" class="refleksi"><i class="fas fa-angle-right fa-lg"></i></button><br>
-                            <span class="input<?php echo $i?>" id="refleksi"></span><br>
+                            <span class="input<?php echo $i?>" id="refleksi"><?php if(isset($project)) echo $project["refleksi"] ?></span><br>
                             <span class="input<?php echo $i?>" id="inputRefleksi"></span>
                         </td>
                     </tr>
@@ -462,7 +533,7 @@
                             <label for="tsm"><b>后续作业/TUGASAN SUSULAN MURID:</b></label>
                         </td>
                         <td>
-                            <input class="input<?php echo $i?> txt" type="text" name="tsm" id="tsm">
+                            <input class="input<?php echo $i?> txt" type="text" name="tsm" id="tsm" value='<?php if(isset($project)) echo $project["tsm"] ?>'>
                         </td>
                     </tr>
                 </table>
@@ -510,6 +581,7 @@
                     e.preventDefault();
                     // Attach a function to the popup's form submit event
                     tema.document.getElementById("tema").addEventListener("submit", function(event) {
+                        alert(1);
                         // Prevent the form from submitting normally
                         event.preventDefault();
 
@@ -1030,10 +1102,9 @@
             uniqueArray.push(uniqueArrays);
             uniqueArray.push(array);
 
-            if (0) {
-            // if (penggal.value == '' || minggu.value == '') {
-            alert("Please fill in the penggal and minggu");
-            window.location.replace('#week');
+            if (penggal.value == '' || minggu.value == '') {
+                alert("Please fill in the penggal and minggu");
+                window.location.replace('#week');
             } else {
             for (let i = 0; i < table.length; i++) {
                 let input = document.getElementsByClassName('input' + i);
@@ -1071,9 +1142,10 @@
                 $.ajax({
                 url: 'subject.php',
                 type: 'POST',
-                data: {'data': JSON.stringify(sub),id:0},
+                data: {'data': JSON.stringify(sub),id:<?php echo $id ?>,year:year.innerHTML,month:month.innerHTML,date:date.innerHTML,day:day.innerHTML},
                 success:function(data) {
-                    alert(data);
+                    alert("Success!");
+                    window.location.reload();
                 },
                 error: function (e) {
                     alert("Added user failed !!");

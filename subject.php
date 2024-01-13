@@ -4,7 +4,22 @@
   if(ISSET($_POST["data"])){
     $data = json_decode($_POST["data"]);
     $id = $_POST["id"];
+    $year = $_POST["year"];
+    $month = $_POST["month"];
+    $date = $_POST["date"];
+    $day = $_POST["day"];
+    $userId = 0;
+
+    if(isset($_COOKIE["id"])) {
+        $userId = $_COOKIE["id"];
+    }
     $subject = [
+        'penggal' => $data[1],
+        'year' => $year,
+        'month' => $month,
+        'date' => $date,
+        'day' => $day,
+        'penggal' => $data[1],
         'penggal' => $data[1],
         'minggu' => $data[2],
         'period' => $data[0],
@@ -33,15 +48,17 @@
         'refleksi' => $data[27],
         'tsm' => $data[28]
     ];
-    $sql = insert('project', $subject);
     if ($id) {
-        $sql = "UPDATE `project` SET $subject WHERE `id`='$id' ";
+        $sql = update($id, 'project', $subject);
+    } else {
+        $subject['userId'] = $userId;
+        $sql = insert('project', $subject);
     }
     if($conn->query($sql)===TRUE){
-        echo "Add project success";
+        header("Location:period.php");
     }else{
         //print_r($sql);
-        echo "failed";
+        echo "<script>alert('Failed.')</script>";
     }
   }
 ?>
@@ -376,7 +393,7 @@
                 <!-- <td><?php //echo $row["date"]."-".$row["month"]."-".date('Y'); ?></td> -->
                 <td><?php echo $count++; ?></td>
                 <td><?php echo $row["period"];?></td>
-                <td><a href="edit.php?id=<?php echo $row["id"];?>">EDIT</a> ||
+                <td><a href="pmain.php?id=<?php echo $row["id"];?>">EDIT</a> ||
 
                     <a href="del.php?id=<?php echo $row["id"];?>"
                     onclick="return confirm('Are you sure to delete subject?')">DELETE</a>

@@ -69,7 +69,7 @@
             #next{
                 border-right: 3px solid grey;
                 border-top: 3px solid grey;
-                margin-left: -20px;    
+                margin-left: -20px;
             }
             .title .float{
                 float: left;
@@ -153,13 +153,16 @@
         </div>
     </body>
     <?php
-        $id = $_COOKIE["id"];
+        $id = 0;
+        if(isset($_COOKIE["id"])) {
+            $id = $_COOKIE["id"];
+        }
         $sql = "SELECT * FROM `calendar` WHERE `userId` = '$id' ";
         $result = $conn->query($sql);
         $results = $conn->query($sql);
         // echo $sql;
     ?>
-    
+
     <script>
         let daybox = document.getElementById('days');
         let monthtitle = document.getElementById('monthnYear')
@@ -184,29 +187,29 @@
             }
             daybox.innerHTML = dayinner;
             monthtitle.innerHTML = monthName[currentMonth] +' '+ currentYear;
-           
+
             let window = document.getElementById('window');
             let window_Date = document.getElementById('window_Date');
             let datebutton = g=document.getElementsByClassName('dateButton');
             let this_date;
             let this_day;
-            
+
             for(let i = 0; i<datebutton.length;i++){
                 <?php
                 for($i = 0; $i<$results->num_rows; $i++){
                     $rows = $results->fetch_assoc();?>
-                    if(<?php echo $rows["date"] ?> == datebutton[i].innerHTML && '<?php echo $rows["month"] ?>' == monthName[currentMonth] 
+                    if(<?php echo $rows["date"] ?> == datebutton[i].innerHTML && '<?php echo $rows["month"] ?>' == monthName[currentMonth]
                         && <?php echo $rows["year"] ?> == currentYear){
                             datebutton[i].style.color = 'blue';
                         }
                 <?php } ?>
                 datebutton[i].onclick = function(){
                     let check = false;
-                    <?php 
+                    <?php
                     for($i = 0; $i<$result->num_rows; $i++){
                         $row = $result->fetch_assoc();?>
-                        
-                        if(<?php echo $row["date"] ?> == datebutton[i].innerHTML && '<?php echo $row["month"] ?>' == monthName[currentMonth] 
+
+                        if(<?php echo $row["date"] ?> == datebutton[i].innerHTML && '<?php echo $row["month"] ?>' == monthName[currentMonth]
                         && <?php echo $row["year"] ?> == currentYear){
                             check = true;
                         }
@@ -221,15 +224,15 @@
                         this_day = new Date(currentYear,currentMonth,datebutton[i].innerHTML).getDay();
                     }
                     <?php //$row = $result->fetch_assoc(); ?>
-                    
-                    
+
+
                 }
             }
 
             let confirm = document.getElementById('confirm');
             let cancel = document.getElementById('cancel');
             confirm.onclick = function(){
-                location.href = "pmain.php?year="+currentYear+"&month="+monthName[currentMonth]+"&date="+this_date+"&day="+this_day;       
+                location.href = "pmain.php?year="+currentYear+"&month="+monthName[currentMonth]+"&date="+this_date+"&day="+this_day;
             }
             cancel.onclick = function(){
                 window.style.display = 'none';

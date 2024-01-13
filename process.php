@@ -21,7 +21,7 @@
         }
 
         a { text-decoration: none; }
-        
+
     </style>
 </head>
 <body style="margin:20px 50px 0 50px;">
@@ -32,7 +32,7 @@
         </label>
         <label class="logo">MyPDP</label>
         <ul class="ul">
-            <li><?php echo $_COOKIE["username"];?></li>
+            <li><?php if( isset($_COOKIE["username"])) echo $_COOKIE["username"];?></li>
             <li><a href="period.php">SETTING</a></li>
             <li><a href="process.php">PROCESS</a></li>
             <li><a href="print.php">PRINT</a></li>
