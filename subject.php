@@ -1,6 +1,12 @@
 <?php
     include("db.php");
 
+    $textSearch = "";
+    $search = "";
+    if(isset($_POST["search"])){
+        $textSearch = $_POST["search"];
+        $search = "where period like '%" . $_POST['search'] . "%'";
+    }
   if(ISSET($_POST["data"])){
     $data = json_decode($_POST["data"]);
     $id = $_POST["id"];
@@ -19,8 +25,6 @@
         'month' => $month,
         'date' => $date,
         'day' => $day,
-        'penggal' => $data[1],
-        'penggal' => $data[1],
         'minggu' => $data[2],
         'period' => $data[0],
         'tema' => $data[3],
@@ -235,14 +239,14 @@
         <br>
         <form action="" method="POST">
         <div style="margin: 0px 80px 0 0; float:right">
-            <input style="width:250px; height:30px; border-radius: 10px" type="text" name="search">
+            <input style="width:250px; height:30px; border-radius: 10px" type="text" name="search" value="<?php echo $textSearch ?>">
             <button style="width:65px; height:30px; border-radius: 10px" name="searchbtn" ><i class="fa-solid fa-magnifying-glass fa-lg"></i></button><br>
         </div>
         </form>
         <br><br>
         <div>
         <h2 style="float: left; margin-left:5px">LIST SUBJECT</h2>
-        <div class="btn" style="float: right" id="bulk"><span>ADD SUBJECT</span></div>
+        <!-- <div class="btn" style="float: right" id="bulk"><span>ADD SUBJECT</span></div> -->
         </div>
 
         <br>
@@ -375,7 +379,7 @@
             </thead>
             <?php
                 $count = 1;
-                $sql = "SELECT * FROM `project`";
+                $sql = "SELECT * FROM `project` $search";
                 $result = $conn->query($sql);
                 // if($result->num_rows==0){
                 //     echo "<script>alert('The user does not exist.')</script>";

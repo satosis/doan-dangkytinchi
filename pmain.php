@@ -45,6 +45,7 @@
                 &#9776;
             </label>
             <label class="logo">MyPDP</label>
+            <?php if(isset($_COOKIE["username"])): ?>
             <ul class="ul">
                 <li><?php if(isset($_COOKIE["username"])) echo $_COOKIE["username"];?></li>
                 <li><a href="period.php">SETTING</a></li>
@@ -52,6 +53,14 @@
                 <li><a href="print.php">PRINT</a></li>
                 <li><a href="logout.php">LOGOUT</a></li>
             </ul>
+            <?php else: ?>
+            <ul class="ul">
+                <li style="font-size:20px; float: right; margin-right: 80px"><a href="./logout.php">LOGOUT</a></li>
+                <li style="font-size:20px; float: right; margin-right: 80px"><a href="./admin/user.php">ADMIN</a></li>
+                <li style="font-size:20px; float: right; margin-right: 80px"><a href="./subject.php">SUBJECT</a></li>
+                <li style="font-size:20px; float: right; margin-right: 80px"><a href="./process.php">PROCESS</a></li>
+                </ul>
+            <?php endif ?>
         </nav>
         <br><br><hr><br>
         <h2>PROCESS</h2>
@@ -581,7 +590,6 @@
                     e.preventDefault();
                     // Attach a function to the popup's form submit event
                     tema.document.getElementById("tema").addEventListener("submit", function(event) {
-                        alert(1);
                         // Prevent the form from submitting normally
                         event.preventDefault();
 
@@ -1145,7 +1153,7 @@
                 data: {'data': JSON.stringify(sub),id:<?php echo $id ?>,year:year.innerHTML,month:month.innerHTML,date:date.innerHTML,day:day.innerHTML},
                 success:function(data) {
                     alert("Success!");
-                    window.location.reload();
+                    // window.location.reload();
                 },
                 error: function (e) {
                     alert("Added user failed !!");

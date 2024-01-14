@@ -138,7 +138,10 @@
         <div>
         <h3 style="float: left">DAY: <span style="color: red">
         <?php
-        $day = $_COOKIE["day"];
+        $day = 0;
+        if (isset($_COOKIE["day"])) {
+            $day = $_COOKIE["day"];
+        }
         // echo $day;
         if($day==0){
             $day="SUNDAY";
@@ -293,8 +296,14 @@
             </thead>
             <tbody>
             <?php
-                $day = $_COOKIE['day'];
-                $id = $_COOKIE['id'];
+                $day = 0;
+                $id = 0;
+                if (isset($_COOKIE['day'])) {
+                    $day = $_COOKIE['day'];
+                }
+                if (isset($_COOKIE['id'])) {
+                    $id = $_COOKIE['id'];
+                }
                 $sql = "SELECT * FROM `period` JOIN `user` ON period.userid = user.id WHERE userid = '$id' AND `day` = '$day' ORDER BY `std` ";
 
                 if(ISSET($_POST["searchbtn"])){
