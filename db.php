@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 $conn = new mysqli("localhost","root","","project");
 
 function checkEmail($conn, $email){
@@ -18,7 +19,9 @@ function checkEmailName($conn, $email, $name){
     return $result->num_rows;
 
 }
-
+function isAdmin(){
+    return $_SESSION['admin'] == 1;
+}
 function insert($tablename,$values){
     foreach($values as $keys=>$record){
         $key_array[] = $keys;

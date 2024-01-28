@@ -245,6 +245,7 @@
         </form>
         <br><br>
         <div>
+
         <h2 style="float: left; margin-left:5px">LIST SUBJECT</h2>
         <!-- <div class="btn" style="float: right" id="bulk"><span>ADD SUBJECT</span></div> -->
         </div>
@@ -267,7 +268,6 @@
 
             $sql = "INSERT INTO `period`(`userid`, `day`, `std`, `sub`, `class`, `start`, `end`, `noStu`)
             VALUES ('$id','$day','$std','$sub','$class','$start','$end','$noStu')";
-
                 if($conn->query($sql)===TRUE){
                     // echo "<span class='succWrap' style='color:green; margin-left:8px;'>SUCCESS TO ADD NEW PERIOD!</span>";
                     // print_r($sql);
@@ -380,6 +380,9 @@
             <?php
                 $count = 1;
                 $sql = "SELECT * FROM `project` $search";
+                if (!isAdmin()) {
+                    $sql .= " WHERE userId = ". $_SESSION['id'];
+                }
                 $result = $conn->query($sql);
                 // if($result->num_rows==0){
                 //     echo "<script>alert('The user does not exist.')</script>";

@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include '../db.php';
     function readcsv($file){
     //     $test = file($file);

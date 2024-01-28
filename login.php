@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,10 +89,11 @@ a:hover{opacity: 0.6;}
           $pwd = $_POST["pwd"];
 
           if($email === "admin" && $pwd === ("admin")){
-            header("Location:admin\user.php");
+              $_SESSION['admin']= 1;
+              header("Location:admin\user.php");
           }elseif(checkEmail($conn, $email)>0){
               $sql = "SELECT * from user WHERE email = '$email'AND password = PASSWORD('$pwd')";
-              // echo $sql;
+              $_SESSION['admin']= 0;
 
               $result = $conn->query($sql);
 

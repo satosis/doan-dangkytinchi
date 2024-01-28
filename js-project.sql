@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2024 at 10:31 AM
+-- Generation Time: Jan 28, 2024 at 02:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -768,7 +768,10 @@ INSERT INTO `period` (`no`, `userId`, `day`, `std`, `sub`, `class`, `start`, `en
 (13, 1, '1', 1, '音乐', '1M', '21:27', '21:27', 30),
 (14, 3, '0', 2, 'BAHASA MELAYU', '123', '09:49', '09:49', 213),
 (15, 3, '0', 1, '音乐', '12', '10:06', '10:06', 12),
-(16, 3, '1', 1, '音乐', '12', '10:06', '10:06', 12);
+(16, 3, '1', 1, '音乐', '12', '10:06', '10:06', 12),
+(17, 3, '2', 1, 'BAHASA MELAYU', '123', '09:52', '09:52', 12),
+(18, 3, '2', 1, 'BAHASA MELAYU', '213', '09:52', '09:52', 213),
+(22, 4, '1', 1, '音乐', '213', '17:55', '17:55', 213);
 
 -- --------------------------------------------------------
 
@@ -862,39 +865,47 @@ INSERT INTO `preset` (`id`, `subject`, `tema`, `tajuk`, `kdg`, `cstd`, `op`, `kk
 
 CREATE TABLE `project` (
   `id` int(11) UNSIGNED NOT NULL,
-  `userId` varchar(255),
-  `year` varchar(255),
-  `month` varchar(255),
-  `date` varchar(255),
-  `day` varchar(255),
-  `penggal` varchar(255),
-  `minggu` varchar(255),
-  `period` varchar(255),
-  `tema` varchar(255),
-  `preset` varchar(255),
-  `kdg` varchar(255),
-  `cstd` varchar(255),
-  `op` varchar(255),
-  `kk` varchar(255),
-  `apm` varchar(255),
-  `au` varchar(255),
-  `apn` varchar(255),
-  `emk` varchar(255),
-  `nilai` varchar(255),
-  `bbm` varchar(255),
-  `pemikiran` varchar(255),
-  `peta` varchar(255),
-  `tahap` varchar(255),
-  `akt21` varchar(255),
-  `p21` varchar(255),
-  `ujian` varchar(255),
-  `sub_ujian` varchar(255),
-  `kemahiran` varchar(255),
-  `aspirasi` varchar(255),
-  `refleksi` varchar(255),
-  `tsm` varchar(255),
-  `pbd` varchar(255)
+  `userId` varchar(255) DEFAULT NULL,
+  `year` varchar(255) DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `day` varchar(255) DEFAULT NULL,
+  `penggal` varchar(255) DEFAULT NULL,
+  `minggu` varchar(255) DEFAULT NULL,
+  `period` varchar(255) DEFAULT NULL,
+  `tema` varchar(255) DEFAULT NULL,
+  `preset` varchar(255) DEFAULT NULL,
+  `kdg` varchar(255) DEFAULT NULL,
+  `cstd` varchar(255) DEFAULT NULL,
+  `op` varchar(255) DEFAULT NULL,
+  `kk` varchar(255) DEFAULT NULL,
+  `apm` varchar(255) DEFAULT NULL,
+  `au` varchar(255) DEFAULT NULL,
+  `apn` varchar(255) DEFAULT NULL,
+  `emk` varchar(255) DEFAULT NULL,
+  `nilai` varchar(255) DEFAULT NULL,
+  `bbm` varchar(255) DEFAULT NULL,
+  `pemikiran` varchar(255) DEFAULT NULL,
+  `peta` varchar(255) DEFAULT NULL,
+  `tahap` varchar(255) DEFAULT NULL,
+  `akt21` varchar(255) DEFAULT NULL,
+  `p21` varchar(255) DEFAULT NULL,
+  `ujian` varchar(255) DEFAULT NULL,
+  `sub_ujian` varchar(255) DEFAULT NULL,
+  `kemahiran` varchar(255) DEFAULT NULL,
+  `aspirasi` varchar(255) DEFAULT NULL,
+  `refleksi` varchar(255) DEFAULT NULL,
+  `tsm` varchar(255) DEFAULT NULL,
+  `pbd` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`id`, `userId`, `year`, `month`, `date`, `day`, `penggal`, `minggu`, `period`, `tema`, `preset`, `kdg`, `cstd`, `op`, `kk`, `apm`, `au`, `apn`, `emk`, `nilai`, `bbm`, `pemikiran`, `peta`, `tahap`, `akt21`, `p21`, `ujian`, `sub_ujian`, `kemahiran`, `aspirasi`, `refleksi`, `tsm`, `pbd`) VALUES
+(2, '3', '2024', 'JANUARY', '1', '1', 'PENGGAL ', 'MINGGU ', '音乐', '单元三 新年到，真快乐', '请你跟我这样拍', '3.1 音乐创作', '3.1.2 利用乐谱图标代替自创简单的节奏', '模仿老师拍打乐谱图标的节奏。', '自创至少1种节奏，然后随着音乐，拍出自创的节奏。', '教师使用歌曲导入。', '引导学生模仿老师拍打乐谱图标的节奏。\n引导学生自创节奏，然后随着音乐，拍出自创的节奏。', '教师要求学生概述今日所学。', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', '__位学生能够掌握技能，__位学生课后跟进。', 'NULL', 'NULL'),
+(3, '4', '2024', 'JANUARY', '1', '1', '122', '21', '音乐', '单元五 小小游戏', '玩游戏', '2.1 唱歌', '2.1.1 以准确的发音唱歌 2.1.2 以正确的音准唱歌', '以准确的发音和音准唱歌。', '随着音乐，唱至少5句歌词。', '跟随老师朗读歌词。', '一面唱歌，一面跟着歌词做动作。 一面唱歌，一面跟着拍子做动作。 一面唱歌，一面玩游戏。', '教师要求学生概述今日所学。', '14', '19', '19', '2', '3', '2', '19', '14', '10', '2', '6', '2', '__位学生能够掌今日所学。', '12', '12');
 
 -- --------------------------------------------------------
 
@@ -1002,7 +1013,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `username`, `password`, `hp`, `credit`, `status`) VALUES
 (1, 'aaa@gmail.com', 'aaa', '*A02AA727CF2E8C5E6F07A382910C4028D65A053A', '1234567890', 2, 1),
 (2, 'bbb@gmail.com', 'bbb', '*8BE34F24D29E7B61EE00E4D5AADAE5CBC713D120', '0987654321', 0, 1),
-(3, 'caa@gmail.com', 'fefeaf', '*97E7471D816A37E38510728AEA47440F9C6E2585', 'e21e12', 123, 1);
+(3, 'caa@gmail.com', 'fefeaf', '*97E7471D816A37E38510728AEA47440F9C6E2585', 'e21e12', 123, 1),
+(4, 'admin@gmail.comm', 'root', '*97E7471D816A37E38510728AEA47440F9C6E2585', '1232312', 365, 1),
+(5, 'giaphung2k1@gmail.com', 'giaphung2k1', '*AF46244F4F864BD1CBBA6CC297C0603389F0397C', '32', 365, 1);
 
 --
 -- Indexes for dumped tables
@@ -1268,7 +1281,7 @@ ALTER TABLE `pemikiran`
 -- AUTO_INCREMENT for table `period`
 --
 ALTER TABLE `period`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `peta`
@@ -1280,7 +1293,7 @@ ALTER TABLE `peta`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `refleksi`
@@ -1304,7 +1317,7 @@ ALTER TABLE `ujian`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

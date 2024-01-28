@@ -3,7 +3,7 @@
     $id = $_GET["id"];
     //print_r($_GET);
 
-    $sql = "DELETE FROM `project` WHERE `id` = '$id'";
+    $sql = "DELETE FROM `period` WHERE `no` = '$id'";
 
     if($conn->query($sql)===TRUE){
         header('Location: ' . $_SERVER['HTTP_REFERER']);

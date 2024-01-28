@@ -1,22 +1,16 @@
-<?php
-    session_start();
-?>
-<b style="float:left; font-size:35px">MyPDP</b>
-
-<p style="float:right">
-
-<span class="nav"><a href="print.php">PRINT</a></span>
-<span class="nav"><a href="process.php">PROCESS</a></span>
-<span class="nav"><a href="period.php">SETTING</a></span>
-<span class="nav"><?php echo $_SESSION["username"]?></span>
-<span class="nav"><a href="logout.php">LOGOUT</a></span>
-
-
-</p>
-<style>
-    .nav{
-        font-size: 18px;
-        margin-right: 30px;
-        text-transform: uppercase;
-    }
-</style>
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn" id="hamburger">
+        &#9776;
+    </label>
+    <label class="logo">MyPDP</label>
+    <ul class="ul">
+        <li><?php if(isset($_COOKIE["username"])) echo $_COOKIE["username"];?></li>
+        <li><a href="period.php">SETTING</a></li>
+        <li><a href="process.php">PROCESS</a></li>
+        <li><a href="subject.php">SUBJECT</a></li>
+        <li><a href="print.php">PRINT</a></li>
+        <li><a href="logout.php">LOGOUT</a></li>
+    </ul>
+</nav>
+<br><br><br><hr><br>
